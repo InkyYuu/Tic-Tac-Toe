@@ -9,6 +9,8 @@ struct Player
     bool isAI = false;
 };
 
-Player create_player();
+Player createPlayer();
 
-Player create_ai_player(char symbol);
+Player createPlayer(char symbol);
+
+Player createAIPlayer(char symbol);

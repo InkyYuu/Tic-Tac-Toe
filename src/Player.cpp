@@ -28,7 +28,7 @@ static char askSymbol()
     }
 }
 
-Player create_player()
+Player createPlayer()
 {
     Player player{};
     player.isAI = false;
@@ -37,7 +37,16 @@ Player create_player()
     return player;
 }
 
-Player create_ai_player(char symbol)
+Player createPlayer(char symbol)
+{
+    Player player{};
+    player.isAI = false;
+    player.name = askName();
+    player.symbol = symbol;
+    return player;
+}
+
+Player createAIPlayer(char symbol)
 {
     Player ai{};
     ai.name = "IA";
