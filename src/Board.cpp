@@ -9,23 +9,49 @@ void Board::initBoard()
     }
 }
 
-static void print_separator()
-{
-    std::cout << "+---+---+---+\n";
-}
-
 void Board::drawBoard()
 {
-    print_separator();
+    std::cout << "╔═════════╦═════════╦═════════╗\n";
     for (int row = 0; row < SIZE; ++row)
     {
-        std::cout << "|";
+        std::cout << "║";
         for (int col = 0; col < SIZE; ++col)
         {
-            std::cout << " " << cells[row * SIZE + col] << " |";
+            if (cells[row * SIZE + col] != 'X' && cells[row * SIZE + col] != 'O') {
+                std::cout << " " << "\033[0;30m" << cells[row * SIZE + col] << "\033[0m" << "       ║";
+                continue;
+            }
+            else{
+                std::cout << " " << "\033[0;30m \033[0m" << "       ║";
+            }
+
         }
-        std::cout << "\n";
-        print_separator();
+        std::cout << "\n║";
+        for (int col = 0; col < SIZE; ++col)
+        {
+            if (cells[row * SIZE + col] != 'X' && cells[row * SIZE + col] != 'O') {
+                std::cout << "    " << ' ' << "    ║";
+                continue;
+            }
+            std::cout << "    ";
+            if (cells[row * SIZE + col] == 'X') {
+                std::cout << "\033[1;34m"
+                          << cells[row * SIZE + col]
+                          << "\033[0m";
+            } else {
+                std::cout << "\033[1;31m"
+                          << cells[row * SIZE + col]
+                          << "\033[0m";
+            } 
+            std::cout << "    ║";
+        }
+        std::cout << "\n║         ║         ║         ║\n";
+        if (row < SIZE - 1) {
+            std::cout << "╠═════════╬═════════╬═════════╣\n";
+        } else {
+            std::cout << "╚═════════╩═════════╩═════════╝\n";
+        }
+        
     }
 }
 

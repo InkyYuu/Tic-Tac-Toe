@@ -15,6 +15,7 @@ struct Game
     Player player1;
     Player player2;
     GameMode mode;
+    int firstPlayer;
 
     void initGame();
 

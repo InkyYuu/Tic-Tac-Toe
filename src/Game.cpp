@@ -36,12 +36,12 @@ void Game::initGame()
 
   clearScreen();
   std::cout << std::endl;
-  std::cout << "████████╗██╗ ██████╗████████╗ █████╗  ██████ ████████╗ ██████╗ ███████╗" << std::endl;
-  std::cout << "╚══██╔══╝██║██╔════╝╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔════╝" << std::endl;
-  std::cout << "   ██║   ██║██║        ██║   ███████║██║        ██║   ██║   ██║█████╗  " << std::endl;
-  std::cout << "   ██║   ██║██║        ██║   ██╔══██║██║        ██║   ██║   ██║██╔══╝  " << std::endl;
-  std::cout << "   ██║   ██║╚██████╗   ██║   ██║  ██║╚██████╗   ██║   ╚██████╔╝███████╗" << std::endl;
-  std::cout << "   ╚═╝   ╚═╝ ╚═════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝" << std::endl;
+  std::cout << "████████╗██╗ ██████╗ ████████╗ █████╗  ██████  ████████╗ ██████╗ ███████╗" << std::endl;
+  std::cout << "╚══██╔══╝██║██╔════╝ ╚══██╔══╝██╔══██╗██╔════╝ ╚══██╔══╝██╔═══██╗██╔════╝" << std::endl;
+  std::cout << "   ██║   ██║██║         ██║   ███████║██║         ██║   ██║   ██║█████╗  " << std::endl;
+  std::cout << "   ██║   ██║██║         ██║   ██╔══██║██║         ██║   ██║   ██║██╔══╝  " << std::endl;
+  std::cout << "   ██║   ██║╚██████╗    ██║   ██║  ██║╚██████╗    ██║   ╚██████╔╝███████╗" << std::endl;
+  std::cout << "   ╚═╝   ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚══════╝" << std::endl;
   std::cout << std::endl;
   std::cout << "By Kellian Bredeau" << std::endl;
   std::cout << std::endl;
@@ -68,7 +68,7 @@ void Game::initGame()
 
   std::cout << "\n-----------------------------------------------------------------------\n"<<std::endl;
 
-  board.drawBoard();
+  this->firstPlayer = rand() % 2 + 1;
 } 
 
 void Game::waitForUser()
@@ -77,7 +77,36 @@ void Game::waitForUser()
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+static int askMove(const Player& player, Board& board) {
+  int position;
+  while (true)
+  {
+    if (player.symbol == 'X') {
+        std::cout << "\033[1;34m";
+    } else {
+        std::cout << "\033[1;31m";
+    } 
+    std::cout << player.name << " (" << player.symbol << "), entrez votre coup (1-9) : ";
+    std::cin >> position;
+    if (!std::cin.fail() && position >= 1 && position <= 9 && board.isMoveValid(position))
+    {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return position;
+    }
+    std::cout << "Coup invalide, veuillez entrer un nombre entre 1 et 9.\n";
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  }
+}
+
+static int chooseAIMove(Board& board) {
+  // Doit choisir un coup intelligent
+  // Soit il gagne directement s'il peut
+  // Soit il bloque le joueur s'il va gagner au prochain tour
+  // Sinon, il choisit une position intéressante pour lui (en fonction de ses anciens coups)
+}
+
 void Game::runGameLoop()
 {
-  // Implémentation à venir
+  
 }
