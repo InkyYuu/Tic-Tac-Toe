@@ -22,6 +22,10 @@ struct Game
     void runGameLoop();
 
     void waitForUser();
+
+    int askMove(const Player& player);
+
+    int chooseAIMove();
 };
 
 void clearScreen();

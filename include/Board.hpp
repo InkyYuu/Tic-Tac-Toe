@@ -48,5 +48,5 @@ struct Board
       @param position La derniere position jouee (1-9).
       @return true si le joueur a gagne, false sinon.
     */
-    bool verifyWin(int position);
+    bool verifyWin(const int& position, const char& symbol, bool predictive);
 };

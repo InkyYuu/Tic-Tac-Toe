@@ -11,7 +11,7 @@ void Board::initBoard()
 
 void Board::drawBoard()
 {
-    std::cout << "╔═════════╦═════════╦═════════╗\n";
+    std::cout << "\033[0m╔═════════╦═════════╦═════════╗\n";
     for (int row = 0; row < SIZE; ++row)
     {
         std::cout << "║";
@@ -49,7 +49,7 @@ void Board::drawBoard()
         if (row < SIZE - 1) {
             std::cout << "╠═════════╬═════════╬═════════╣\n";
         } else {
-            std::cout << "╚═════════╩═════════╩═════════╝\n";
+            std::cout << "╚═════════╩═════════╩═════════╝\033[0m\n";
         }
         
     }
@@ -85,9 +85,8 @@ bool Board::isBoardFull()
     return true;
 }
 
-bool Board::verifyWin(int position)
+bool Board::verifyWin(const int &position, const char &symbol, bool predictive)
 {
-    char symbol = cells[position - 1];
     int row = (position - 1) / SIZE;
     int col = (position - 1) % SIZE;
     bool win;
@@ -97,8 +96,12 @@ bool Board::verifyWin(int position)
     {
         if (cells[row * SIZE + c] != symbol)
         {
-            win = false;
-            break;
+            if (predictive && row * SIZE + c + 1 == position) {
+                continue;
+            } else {
+                win = false;
+                break;
+            }
         }
     }
     if (win) return true;
@@ -108,8 +111,12 @@ bool Board::verifyWin(int position)
     {
         if (cells[r * SIZE + col] != symbol)
         {
-            win = false;
-            break;
+            if (predictive && r * SIZE + col + 1 == position) {
+                continue;
+            } else {
+                win = false;
+                break;
+            }
         }
     }
     if (win) return true;
@@ -121,8 +128,12 @@ bool Board::verifyWin(int position)
         {
             if (cells[i * SIZE + i] != symbol)
             {
-                win = false;
-                break;
+                if (predictive && i * SIZE + i + 1 == position) {
+                    continue;
+                } else {
+                    win = false;
+                    break;
+                }
             }
         }
         if (win) return true;
@@ -135,8 +146,12 @@ bool Board::verifyWin(int position)
         {
             if (cells[i * SIZE + (SIZE - 1 - i)] != symbol)
             {
-                win = false;
-                break;
+                if (predictive && i * SIZE + (SIZE - 1 - i) + 1 == position) {
+                    continue;
+                } else {
+                    win = false;
+                    break;
+                }
             }
         }
         if (win) return true;

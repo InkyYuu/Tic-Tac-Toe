@@ -18,13 +18,15 @@ static char askSymbol()
     {
         std::cout << "Choisissez un symbole (un seul caractere, ex: X ou O) : ";
         std::cin >> symbol;
-        if (!std::cin.fail())
+        if (!std::cin.fail() && (symbol == 'X' || symbol == 'O' || symbol == 'x' || symbol == 'o'))
         {
-            return symbol;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            return toupper(symbol);
+        } else {
+            std::cout << "Entree invalide, recommencez.\n";
         }
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Entree invalide, recommencez.\n";
     }
 }
 
