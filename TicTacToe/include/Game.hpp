@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Board.hpp"
-#include "Player.hpp"
+#include "../include/Board.hpp"
+#include "../include/Player.hpp"
 
 enum class GameMode
 {

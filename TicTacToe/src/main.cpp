@@ -27,7 +27,6 @@ int main()
     SetConsoleCP(CP_UTF8);
 
     bool playAgain;
-    bool sameParams;
 
     Game game;
     game.initGame();

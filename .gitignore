@@ -4,6 +4,7 @@
 *.app
 
 # Build folders
-/build/
-/bin/
-/.vscode/
+build/
+bin/
+.vscode/
+

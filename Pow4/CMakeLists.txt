@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
 # Le nom du projet
-project(TD08)
+project(Pow4)
 
 # Réglage du compilateur pour les warnings
 if (MSVC)
@@ -30,7 +30,7 @@ foreach(SRC_FILE ${SRC_FILES})
 endforeach()
 
 # On indique que l'on souhaite faire un exécutable avec nos fichiers sources
-add_executable(TicTacToe ${SRC_FILES})
+add_executable(Pow4 ${SRC_FILES})
 
-# le dossier contenant les fichiers d'en-tête pour notre executable TicTacToe
-target_include_directories(TicTacToe PUBLIC "include/")
+# le dossier contenant les fichiers d'en-tête pour notre executable Pow4
+target_include_directories(Pow4 PUBLIC "include/")
