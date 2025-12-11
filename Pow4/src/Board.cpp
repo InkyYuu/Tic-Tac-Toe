@@ -80,6 +80,50 @@ bool Board::isBoardFull()
     return true;
 }
 
+int Board::countInDirection(char color, int index, int deltaRow, int deltaCol)
+{
+    int count = 1;
+    int row = index / COLS;
+    int col = index % COLS;
+
+    while (true) {
+        row += deltaRow;
+        col += deltaCol;
+
+        if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+            break;
+        }
+
+        int newIndex = row * COLS + col;
+        if (cells[newIndex] == color) {
+            count++;
+        } else {
+            break;
+        }
+    }
+
+    row = index / COLS;
+    col = index % COLS;
+
+    while (true) {
+        row -= deltaRow;
+        col -= deltaCol;
+
+        if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+            break;
+        }
+
+        int newIndex = row * COLS + col;
+        if (cells[newIndex] == color) {
+            count++;
+        } else {
+            break;
+        }
+    }
+
+    return count;
+}
+
 bool Board::verifyWin(const int &column, const char &color)
 {
     int lastIndex = -1;
@@ -95,17 +139,18 @@ bool Board::verifyWin(const int &column, const char &color)
         return false;
     }
 
-    int directions[8][2] = {
-        {0, 1},   // Horizontale droite
-        {0, -1},  // Horizontale gauche
-        {1, 0},   // Verticale bas
-        {-1, 0},  // Verticale haut
+    std::array<std::array<int, 2>, 4> dirArray = {{
+        {0, 1},   // Horizontale
+        {1, 0},   // Verticale
         {1, 1},   // Diagonale vers bas droite
-        {-1, -1}, // Diagonale vers haut gauche
         {1, -1},  // Diagonale vers bas gauche
-        {-1, 1}   // Diagonale vers haut droite
-    };
+    }};
 
-    // TODO 
-    // Tip Jules : Faire un array d'array et ne pas faire de tableau C pour itérer dessus
+    for (std::array<int, 2> dir : dirArray) {
+        int count = countInDirection(color, lastIndex, dir[0], dir[1]);
+        if (count >= 4) {
+            return true;
+        }
+    }
+    return false;
 }

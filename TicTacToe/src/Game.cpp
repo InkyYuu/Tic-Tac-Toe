@@ -60,15 +60,6 @@ void Game::initGame()
   player1 = createPlayer();
   player2 = (mode == GameMode::VsAI) ? createAIPlayer((player1.symbol == 'X') ? 'O' : 'X') : createPlayer((player1.symbol == 'X') ? 'O' : 'X');
 
-  Board board;
-  board.initBoard();
-
-  this->board = board;
-
-  std::string p1 = player1.name + " (" + player1.symbol + ")";
-  std::string p2 = player2.name + " (" + player2.symbol + ")";
-  std::string text = "  " + p1 + "   VS   " + p2 + "  ";
-
   srand(time(NULL));
   this->firstPlayer = rand() % 2;
 }

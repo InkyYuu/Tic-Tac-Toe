@@ -28,29 +28,21 @@ void Game::initGame()
 
   clearScreen();
   std::cout << std::endl;
-  std::cout << "\033[0m██████╗  ██████╗ ██╗    ██╗ ╗ \n";
-  std::cout << "██╔══██╗██╔═══██╗██║    ██║    ██  ██╔\n";
-  std::cout << "██████╔╝██║   ██║██║ █╗ ██║    ██╔╝██║ \n";
-  std::cout << "██╔═══╝ ██║   ██║██║███╗██║     █████║\n";
-  std::cout << "██║     ╚██████╔╝╚███╔███╔╝        ██║\n";
-  std::cout << "╚═╝      ╚═════╝  ╚══╝╚══╝         ╚═╝\n";
+  std::cout << "\033[0m██████╗  ██████╗ ██╗    ██╗  ██╗  ██╗ \n";
+  std::cout << "██╔══██╗██╔═══██╗██║    ██║  ██║  ██║\n";
+  std::cout << "██████╔╝██║   ██║██║ █╗ ██║  ██║  ██║ \n";
+  std::cout << "██╔═══╝ ██║   ██║██║███╗██║  ╚███████║\n";
+  std::cout << "██║     ╚██████╔╝╚███╔███╔╝       ██╔╝\n";
+  std::cout << "╚═╝      ╚═════╝  ╚══╝╚══╝        ╚═╝ \n";
   std::cout << std::endl;
   std::cout << "By Kellian Bredeau" << std::endl;
   std::cout << std::endl;
 
   waitForUser();
   clearScreen();
-
-  Board board;
-  board.initBoard();
-
+  
   player1 = createPlayer();
   player2 = createPlayer((player1.color == 'J') ? 'R' : 'J');
-
-  std::string p1 = player1.name + " (" + player1.color + ")";
-  std::string p2 = player2.name + " (" + player2.color + ")";
-  std::string text = "  " + p1 + "   VS   " + p2 + "  ";
-  std::cout << text << std::endl;
 
   srand(time(NULL));
   this->firstPlayer = rand() % 2;
