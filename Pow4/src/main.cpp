@@ -21,7 +21,6 @@ static bool createYesNoPrompt(const std::string& prompt) {
     }
 }
 
-
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
